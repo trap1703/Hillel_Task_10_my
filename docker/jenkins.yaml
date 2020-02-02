@@ -1,0 +1,18 @@
+jenkins:
+  systemMessage: "configure with JCasC plugin v2\n\n"
+security:
+    globalJobDslSecurityConfiguration:
+                     useScriptSecurity: false
+jobs:
+  - script: >
+     job('example-1') {
+         steps {
+             dsl {
+                 external('projectA.groovy', 'projectB.groovy')
+                 external('projectC.groovy')
+                 removeAction('DISABLE')
+                 ignoreExisting()
+                 additionalClasspath('lib')
+             }
+         }
+     }
